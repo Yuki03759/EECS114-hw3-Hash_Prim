@@ -1,0 +1,26 @@
+EECS 114 Homework 3
+
+Author:
+	Yuki Hayashi
+
+Date:
+	2/28/2018
+
+How to make:
+   	1. Open Addressing hash function
+		make hash 
+		./hash 200
+		(it will create a hash table that has 200 entries)
+	2. Chaining hash function
+		make chain
+		./chain 200
+		(it will create a hash table that has 200 entries)
+	3. Prim
+		The solution to dense_100000.txt is solution_dense
+		The solution to sparse_100000.txt is solution_sparse
+		
+		The output of Prim's algorithm is linked list of edges and weights
+		(v, parent, weight)
+		v and parent are connected eges
+		
+		

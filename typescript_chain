@@ -1,0 +1,23 @@
+Script started on Wed 27 Feb 2019 11:05:58 PM PST
+]0;yukih1@laguna:hw3[yukih1@laguna hw3]$ make chain
+gcc -c chain.c
+gcc -o chain chain.o
+]0;yukih1@laguna:hw3[yukih1@laguna hw3]$ ./chain 50
+
+load factor 50%
+chain(insert) : 0
+average chain : 0.000000
+chain(search) : 25
+average chain : 0.002500
+
+
+load factor 90%
+reprobe(insert) : 4
+average reprobe : 0.088889
+chain(search) : 25
+average chain : 0.002500
+
+]0;yukih1@laguna:hw3[yukih1@laguna hw3]$ exit
+exit
+
+Script done on Wed 27 Feb 2019 11:06:11 PM PST

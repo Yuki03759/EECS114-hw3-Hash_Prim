@@ -1,0 +1,23 @@
+Script started on Wed 27 Feb 2019 11:04:44 PM PST
+]0;yukih1@laguna:hw3[yukih1@laguna hw3]$ make hash
+gcc -c hash.c
+gcc -o hash hash.o
+]0;yukih1@laguna:hw3[yukih1@laguna hw3]$ ./hash 50
+
+load factor 50%
+reprobe(insert) : 1
+average reprobe : 0.040000
+reprobe(search) : 11286
+average reprobe : 1.128600
+
+
+load factor 90%
+reprobe(insert) : 77
+average reprobe : 1.711111
+reprobe(search) : 22369
+average reprobe : 2.236900
+
+]0;yukih1@laguna:hw3[yukih1@laguna hw3]$ exit
+exit
+
+Script done on Wed 27 Feb 2019 11:05:07 PM PST

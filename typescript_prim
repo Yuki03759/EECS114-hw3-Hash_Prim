@@ -1,0 +1,15 @@
+Script started on Sun 03 Mar 2019 12:46:22 AM PST
+]0;yukih1@zuma:hw3[yukih1@zuma hw3]$ make prim
+gcc -c prim.c
+gcc -o prim prim.o
+]0;yukih1@zuma:hw3[yukih1@zuma hw3]$ ./prim
+Timer: gettimeofday
+Timer resolution: ~ 1 us (?)
+
+The running time of prim by sparse_100000.txt is  72.0968 seconds 
+
+The running time of prim by dense_100000.txt is  84.8647 seconds 
+]0;yukih1@zuma:hw3[yukih1@zuma hw3]$ exit
+exit
+
+Script done on Sun 03 Mar 2019 12:51:24 AM PST

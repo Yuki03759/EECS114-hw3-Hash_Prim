@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <assert.h>
+#include "timer.c"
 
 #define INFINITY 1000000.0
 
@@ -44,7 +45,7 @@ MinHeapNode* CreateMinHeapNode(int v, float k, int parent){
     n->next = NULL;
     return n;
 }
-
+/*
 List* removeFirstNode(List* l){
     MinHeapNode* currentNode = l->front;
     l->size--;
@@ -52,7 +53,7 @@ List* removeFirstNode(List* l){
     free(currentNode);
     return l;
 }
-
+*/
 void addNodeBack(List* l, int v, float key, int parent){
     assert(l);
     
@@ -185,8 +186,8 @@ Graph* CreateGraph(MinHeap* mh, float** adj)
 
 void writeFile(List* l, char *fileName){
     FILE* fp = fopen(fileName, "w");
-    MinHeapNode* currentNode = l->front;
-    while(currentNode != NULL){
+    MinHeapNode* currentNode = l->front->next;
+    while(currentNode != NULL ){
         fprintf(fp, "v: %d, parent: %d, key: %f\n", currentNode->v, currentNode->parent, currentNode->key); 
         currentNode = currentNode->next;
     }
@@ -267,18 +268,21 @@ List* prim(struct Graph* g){
     int v;
     MinHeap* mh = g->minHeap;
     List* l = CreateList();
-    
     int original_size = mh->size;
     mh->heap[1]->key = 0;
     int j;
     int i=0;
     int test=0;
     int k = 0; 
+    float totalatPrim = 0;
     
     while(mh -> size != 1){
         //do extract-min
         struct MinHeapNode* mhn = extractMin(mh); 
-        addNodeBack(l, mhn->v, mhn->key, mhn->parent);
+        if(mhn->key != INFINITY &&mhn->parent != INFINITY){
+            addNodeBack(l, mhn->v, mhn->key, mhn->parent);
+            totalatPrim = totalatPrim+mhn->key;
+        }
         int u = mhn -> v;
         
         for(i=1; i<mh ->size; i++){
@@ -297,14 +301,55 @@ List* prim(struct Graph* g){
             }
         }
     }
-    return removeFirstNode(l);
+    printf("total weight at prim is %f\n", totalatPrim);
+    return l;
 }       
+
+void addWeight(List* l){
+    float totalweight = 0.0;
+    MinHeapNode* currentNode = l->front;
+    while(currentNode != NULL){
+        totalweight = totalweight + currentNode->key;
+        currentNode = currentNode->next;
+    }
+    printf("total weight is %lf\n", totalweight); 
+}
+
+
 
 int main() 
 {
-     Graph* g = ReadFile("dense_100000.txt");
-     List* l = prim(g);
-     writeFile(l, "solution_dense.txt");
+    stopwatch_init(); 
+    struct stopwatch_t* timer = stopwatch_create (); assert (timer);
+    time_t t;
+    srand((unsigned)time(&t));
+    
+    long double t_qs;
+    
+    Graph* g1 = ReadFile("sparse_100000.txt");
+    
+    
+    
+    stopwatch_start (timer);
+    List* l1 = prim(g1);
+    addWeight(l1);
+    t_qs = stopwatch_stop (timer);
+    
+    printf("\nThe running time of prim by sparse_100000.txt is  %Lg seconds \n", t_qs);
+   
+    writeFile(l1, "solution_sparse.txt");
+    
+            
+    Graph* g2 = ReadFile("dense_100000.txt");
+    
+    stopwatch_start (timer);
+    List* l2 = prim(g2);
+    t_qs = stopwatch_stop (timer);
+    
+    printf("\nThe running time of prim by dense_100000.txt is  %Lg seconds \n", t_qs);
+    
+    addWeight(l2);
+    writeFile(l2, "solution_dense.txt");
 
     return 0;
 }

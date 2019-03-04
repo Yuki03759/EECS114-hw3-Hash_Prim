@@ -22,5 +22,6 @@ How to make:
 		The output of Prim's algorithm is linked list of edges and weights
 		(v, parent, weight)
 		v and parent are connected eges
-		
+		total weight (sparse) is 32881.378906
+		total weight (dense) is 12011.201172	
 		

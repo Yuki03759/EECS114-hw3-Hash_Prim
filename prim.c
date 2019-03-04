@@ -186,9 +186,9 @@ Graph* CreateGraph(MinHeap* mh, float** adj)
 
 void writeFile(List* l, char *fileName){
     FILE* fp = fopen(fileName, "w");
-    MinHeapNode* currentNode = l->front->next;
+    MinHeapNode* currentNode = l->front;
     while(currentNode != NULL ){
-        fprintf(fp, "v: %d, parent: %d, key: %f\n", currentNode->v, currentNode->parent, currentNode->key); 
+        fprintf(fp, "from: %d, to: %d, weight: %f\n", currentNode->parent, currentNode->v, currentNode->key); 
         currentNode = currentNode->next;
     }
     fclose(fp);
@@ -258,7 +258,6 @@ struct MinHeapNode* extractMin(struct MinHeap* mh){
         MinHeapify(mh, 1);
     }
     
- 
     return root;
 }
 
